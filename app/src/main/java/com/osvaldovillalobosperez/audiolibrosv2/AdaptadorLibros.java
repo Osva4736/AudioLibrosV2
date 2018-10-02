@@ -16,6 +16,7 @@ public class AdaptadorLibros
     private LayoutInflater inflador; //Crea Layouts a partir del XML
     protected Vector<Libro> vectorLibros; //Vector con libros a visualizar
     private Context contexto;
+    private View.OnLongClickListener onLongClickListener;
 
     public void setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
@@ -28,6 +29,10 @@ public class AdaptadorLibros
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.vectorLibros = vectorLibros;
         this.contexto = contexto;
+    }
+
+    public void setOnLongClickListener(View.OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
     }
 
     //Creamos nuestro ViewHolder, con los tipos de elementos a modificar
@@ -49,6 +54,7 @@ public class AdaptadorLibros
         // Inflamos la vista desde el xml
         View v = inflador.inflate(R.layout.elemento_selector, null);
         v.setOnClickListener(this.onClickListener);
+        v.setOnLongClickListener(onLongClickListener);
         return new ViewHolder(v);
     }
     // Usando como base el ViewHolder y lo personalizamos
@@ -61,5 +67,13 @@ public class AdaptadorLibros
     // Indicamos el número de elementos de la lista
     @Override public int getItemCount() {
         return vectorLibros.size();
+    }
+
+    public void setOnItemClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+    public void setOnItemLongClickListener(View.OnLongClickListener
+                                                   onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
     }
 }
